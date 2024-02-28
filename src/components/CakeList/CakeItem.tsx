@@ -1,6 +1,7 @@
 import { Cake } from '@/api/cake';
 import Image from 'next/image';
 import { Box, Card, CardContent, CardOverflow, Typography } from '@mui/joy';
+import PriceSelect from './PriceSelect';
 
 interface Props extends Cake {}
 
@@ -24,13 +25,8 @@ export default function CakeItem(props: Props) {
         </Box>
       </CardOverflow>
       <CardContent>
-        <Typography level='title-md'>{name}</Typography>
-        <Typography
-          level='body-sm'
-          sx={{ maxHeight: '100px', overflow: 'auto' }}
-        >
-          {desc}
-        </Typography>
+        <Typography level='title-sm'>{name}</Typography>
+        <PriceSelect prices={prices} />
       </CardContent>
     </Card>
   );
