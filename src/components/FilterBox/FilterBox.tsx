@@ -8,7 +8,8 @@ import {
   ageKeys,
   genderKeys,
 } from '@/constants';
-import { Chip } from '@mui/joy';
+import { CloseRounded } from '@mui/icons-material';
+import { IconButton, Option, Select } from '@mui/joy';
 import Box from '@mui/joy/Box';
 import { useState } from 'react';
 
@@ -16,55 +17,85 @@ export default function FilterBox() {
   const [selectedGender, setSelectedGender] = useState<Gender | null>(null);
   const [selectedAge, setSelectedAge] = useState<Age | null>(null);
 
-  const onClickGender = (gender: Gender) => {
-    setSelectedGender(selectedGender === gender ? null : gender);
-  };
-
-  const onClickAge = (age: Age) => {
-    setSelectedAge(selectedAge === age ? null : age);
-  };
-
   return (
     <Box
       p={1}
       position='sticky'
       top={0}
-      zIndex={1100}
+      zIndex={900}
       sx={{
         backdropFilter: 'saturate(180%) blur(5px)',
       }}
       bgcolor='hsla(0,0%,100%,.8)'
+      display='flex'
+      gap={1}
     >
-      <Box display='flex' gap={0.5} flexWrap='wrap'>
+      <Select
+        placeholder='Giới tính'
+        value={selectedGender}
+        onChange={(_, v: Gender | null) => setSelectedGender(v)}
+        {...(selectedGender !== null && {
+          endDecorator: (
+            <IconButton
+              size='sm'
+              variant='plain'
+              color='primary'
+              onMouseDown={(event) => {
+                event.stopPropagation();
+              }}
+              onClick={() => {
+                setSelectedGender(null);
+              }}
+              sx={{ p: 0, minHeight: 0, minWidth: 0 }}
+            >
+              <CloseRounded />
+            </IconButton>
+          ),
+          indicator: null,
+          color: 'primary',
+        })}
+      >
         {genderKeys.map((gender) => {
-          const checked = selectedGender === gender;
           return (
-            <Chip
-              key={gender}
-              variant={checked ? 'solid' : 'outlined'}
-              color={checked ? 'primary' : 'neutral'}
-              onClick={() => onClickGender(gender)}
-            >
+            <Option key={gender} value={gender}>
               {GenderStr[gender]}
-            </Chip>
+            </Option>
           );
         })}
-      </Box>
-      <Box display='flex' gap={0.5} flexWrap='wrap' mt={1}>
-        {ageKeys.map((age) => {
-          const checked = selectedAge === age;
-          return (
-            <Chip
-              key={age}
-              variant={checked ? 'solid' : 'outlined'}
-              color={checked ? 'primary' : 'neutral'}
-              onClick={() => onClickAge(age)}
+      </Select>
+      <Select
+        placeholder='Độ tuổi'
+        value={selectedAge}
+        onChange={(_, v: Age | null) => setSelectedAge(v)}
+        {...(selectedAge !== null && {
+          endDecorator: (
+            <IconButton
+              size='sm'
+              variant='plain'
+              color='primary'
+              onMouseDown={(event) => {
+                event.stopPropagation();
+              }}
+              onClick={() => {
+                setSelectedAge(null);
+              }}
+              sx={{ p: 0, minHeight: 0, minWidth: 0 }}
             >
+              <CloseRounded />
+            </IconButton>
+          ),
+          indicator: null,
+          color: 'primary',
+        })}
+      >
+        {ageKeys.map((age) => {
+          return (
+            <Option key={age} value={age}>
               {AgeStr[age]} tuổi
-            </Chip>
+            </Option>
           );
         })}
-      </Box>
+      </Select>
     </Box>
   );
 }
