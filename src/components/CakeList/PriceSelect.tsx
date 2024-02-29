@@ -2,7 +2,7 @@
 
 import { CakePrice } from '@/api/cake';
 import { numberWithCommas } from '@/utils/string-utils';
-import { Box, Button, Typography } from '@mui/joy';
+import { Box, Chip, Typography } from '@mui/joy';
 import { useState } from 'react';
 
 interface Props {
@@ -11,35 +11,38 @@ interface Props {
 
 export default function PriceSelect({ prices }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
-  // eslint-disable-next-line
-  const { oldPrice, price, size } = prices[activeIndex];
+  const activePrice = prices[activeIndex];
+
   return (
     <Box>
-      <Typography level='body-sm'>
-        {!!oldPrice && (
-          <Typography
-            level='body-xs'
-            component='span'
-            sx={{ textDecoration: 'line-through' }}
-          >
-            {numberWithCommas(oldPrice)}đ
-          </Typography>
-        )}
-        &nbsp;
-        {numberWithCommas(prices[activeIndex].price)}đ
+      {!!activePrice.oldPrice && (
+        <Typography
+          level='body-xs'
+          component='span'
+          sx={{ textDecoration: 'line-through' }}
+        >
+          {numberWithCommas(activePrice.oldPrice)}đ
+        </Typography>
+      )}
+      <Typography color='primary' fontWeight='bold' level='body-sm'>
+        {numberWithCommas(activePrice.price)}đ
       </Typography>
-      <Box display='flex' flexWrap='wrap' gap={0.5}>
-        {prices.map((price, index) => (
-          <Button
-            key={price.id}
-            color={index === activeIndex ? 'primary' : 'neutral'}
-            size='sm'
-            variant={index === activeIndex ? 'soft' : 'outlined'}
-            onClick={() => setActiveIndex(index)}
-          >
-            {price.size}
-          </Button>
-        ))}
+      <Box display='flex' gap={0.5} flexWrap='wrap' mt={0.5}>
+        {prices.map((price, index) => {
+          const isActive = index === activeIndex;
+          return (
+            <Chip
+              key={price.id}
+              color={isActive ? 'primary' : 'neutral'}
+              size='sm'
+              variant={isActive ? 'soft' : 'outlined'}
+              onClick={() => setActiveIndex(index)}
+              sx={{ justifyContent: 'flex-start' }}
+            >
+              {price.size}
+            </Chip>
+          );
+        })}
       </Box>
     </Box>
   );

@@ -5,11 +5,14 @@ import Box from '@mui/joy/Box';
 
 export default async function Home() {
   const cakes = await getCakes();
+  const duplicatedCakes = [...cakes, ...cakes, ...cakes];
 
   return (
     <Box>
       <FilterBox />
-      <CakeList cakes={cakes} />
+      <Box p={1} pt={0}>
+        <CakeList cakes={duplicatedCakes} />
+      </Box>
     </Box>
   );
 }
