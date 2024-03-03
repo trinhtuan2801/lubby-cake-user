@@ -2,31 +2,43 @@
 
 import { CakePrice } from '@/api/cake';
 import { numberWithCommas } from '@/utils/string-utils';
-import { Box, Chip, Typography } from '@mui/joy';
+import { Box, BoxProps, Chip, Typography, TypographyProps } from '@mui/joy';
 import { useState } from 'react';
 
-interface Props {
+interface Props extends BoxProps {
   prices: CakePrice[];
+  ActivePriceProps?: TypographyProps;
 }
 
-export default function PriceSelect({ prices }: Props) {
+export default function PriceSelect({
+  prices,
+  ActivePriceProps,
+  ...ContainerProps
+}: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
   const activePrice = prices[activeIndex];
 
   return (
-    <Box>
-      {!!activePrice.oldPrice && (
+    <Box {...ContainerProps}>
+      <Box display='flex' gap={1} alignItems='center'>
         <Typography
-          level='body-xs'
-          component='span'
-          sx={{ textDecoration: 'line-through' }}
+          color='primary'
+          fontWeight='bold'
+          level='body-md'
+          {...ActivePriceProps}
         >
-          {numberWithCommas(activePrice.oldPrice)}đ
+          {numberWithCommas(activePrice.price)}đ
         </Typography>
-      )}
-      <Typography color='primary' fontWeight='bold' level='body-sm'>
-        {numberWithCommas(activePrice.price)}đ
-      </Typography>
+        {!!activePrice.oldPrice && (
+          <Typography
+            level='body-xs'
+            component='span'
+            sx={{ textDecoration: 'line-through' }}
+          >
+            {numberWithCommas(activePrice.oldPrice)}đ
+          </Typography>
+        )}
+      </Box>
       <Box display='flex' gap={0.5} flexWrap='wrap' mt={0.5}>
         {prices.map((price, index) => {
           const isActive = index === activeIndex;
@@ -34,8 +46,7 @@ export default function PriceSelect({ prices }: Props) {
             <Chip
               key={price.id}
               color={isActive ? 'primary' : 'neutral'}
-              size='sm'
-              variant={isActive ? 'soft' : 'outlined'}
+              variant={isActive ? 'solid' : 'outlined'}
               onClick={() => setActiveIndex(index)}
               sx={{ justifyContent: 'flex-start' }}
             >

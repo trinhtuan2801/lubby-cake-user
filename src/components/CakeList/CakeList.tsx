@@ -8,10 +8,10 @@ interface Props {
 
 export default function CakeList({ cakes }: Props) {
   return (
-    <Grid container spacing={0.3}>
-      {cakes.map((cake) => (
+    <Grid container spacing={0.5}>
+      {cakes.map((cake, index) => (
         <Grid xs={4} sm={3} md={2} key={cake.id}>
-          <CakeItem {...cake} />
+          <CakeItem cardIndex={index} {...cake} />
         </Grid>
       ))}
     </Grid>
