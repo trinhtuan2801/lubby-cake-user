@@ -39,7 +39,7 @@ export default function PriceSelect({
           </Typography>
         )}
       </Box>
-      <Box display='flex' gap={0.5} flexWrap='wrap' mt={0.5}>
+      <Box display='flex' gap={0.5} flexWrap='wrap' mt={1}>
         {prices.map((price, index) => {
           const isActive = index === activeIndex;
           return (

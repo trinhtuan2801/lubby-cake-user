@@ -14,6 +14,7 @@ import PriceSelect from '../CakeList/PriceSelect';
 import { useEffect } from 'react';
 import { Fade } from '@mui/material';
 import useCardIndex from '@/zustand/useCardIndex';
+import { setPageScroll } from '@/utils/dom-utils';
 
 interface Props {
   cakes: Cake[];
@@ -21,6 +22,10 @@ interface Props {
 
 export default function CardSwiper({ cakes }: Props) {
   const { activeIndex, setActiveIndex, open, setOpen } = useCardIndex();
+
+  useEffect(() => {
+    setPageScroll(!open);
+  }, [open]);
 
   return (
     <Fade in={open}>
@@ -33,7 +38,9 @@ export default function CardSwiper({ cakes }: Props) {
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        onClick={() => setOpen(false)}
+        onClick={() => {
+          setOpen(false);
+        }}
       >
         <Box onClick={(e) => e.stopPropagation()} sx={{ mt: -20 }}>
           <Swiper
@@ -41,61 +48,55 @@ export default function CardSwiper({ cakes }: Props) {
             grabCursor={true}
             modules={[EffectCards]}
             onSlideChange={(e) => setActiveIndex(e.activeIndex)}
+            cardsEffect={{
+              slideShadows: false,
+            }}
           >
             {cakes.map(({ id, images, name, prices }, cardIndex) => (
               <SwiperSlide key={id}>
                 {Math.abs(activeIndex - cardIndex) <= 4 && (
                   <Box
+                    flexGrow={1}
                     sx={{
-                      flexGrow: 1,
-                      position: 'relative',
-                      bgcolor: 'white',
-                      backgroundClip: 'padding-box',
-                      border: 'solid 6px transparent',
-                      borderRadius: '20px',
-                      '&:before': {
-                        content: '""',
-                        position: 'absolute',
-                        inset: 0,
-                        zIndex: -1,
-                        margin: '-6px',
-                        borderRadius: 'inherit',
-                        background: 'linear-gradient(135deg,#07a3b2,#d9ecc7)',
-                      },
+                      background: 'linear-gradient(135deg,#07a3b2,#d9ecc7)',
                     }}
+                    borderRadius={16}
+                    overflow='hidden'
+                    p={1}
                   >
-                    <Box p={2} pb={0}>
-                      <Box
-                        position='relative'
-                        sx={{ aspectRatio: '1 / 1' }}
-                        borderRadius={6}
-                        overflow='hidden'
-                      >
-                        {Math.abs(activeIndex - cardIndex) <= 1 && (
-                          <Image
-                            alt='cake image'
-                            src={images[0]}
-                            fill
-                            sizes='(max-width: 600px) 40vw, (max-width: 900px) 26vw, (max-width: 1200px) 20vw, 280px'
-                            style={{ objectFit: 'cover' }}
-                            loading='lazy'
-                          />
-                        )}
+                    <Box bgcolor='white' borderRadius={12} height='100%'>
+                      <Box p={2} pb={0}>
+                        <Box
+                          position='relative'
+                          sx={{ aspectRatio: '1 / 1' }}
+                          borderRadius={4}
+                          overflow='hidden'
+                        >
+                          {Math.abs(activeIndex - cardIndex) <= 1 && (
+                            <Image
+                              alt='cake image'
+                              src={images[0]}
+                              fill
+                              sizes='(max-width: 600px) 40vw, (max-width: 900px) 26vw, (max-width: 1200px) 20vw, 280px'
+                              style={{ objectFit: 'cover' }}
+                            />
+                          )}
+                        </Box>
                       </Box>
-                    </Box>
 
-                    <Box p={2}>
-                      <Typography level='title-sm' color='primary'>
-                        {name}
-                      </Typography>
+                      <Box p={2}>
+                        <Typography level='title-sm' color='primary'>
+                          {name}
+                        </Typography>
 
-                      <PriceSelect prices={prices} mt={0.5} />
+                        <PriceSelect prices={prices} mt={0.5} />
+                      </Box>
                     </Box>
                   </Box>
                 )}
               </SwiperSlide>
             ))}
-            <ActiveIndexJumper currentIndex={activeIndex} />
+            <ActiveIndexJumper />
           </Swiper>
         </Box>
       </Box>
@@ -103,16 +104,13 @@ export default function CardSwiper({ cakes }: Props) {
   );
 }
 
-interface ActiveIndexJumperProps {
-  currentIndex: number;
-}
-
-function ActiveIndexJumper({ currentIndex }: ActiveIndexJumperProps) {
+function ActiveIndexJumper() {
   const swiper = useSwiper();
+  const { open, activeIndex } = useCardIndex();
 
   useEffect(() => {
-    if (!swiper.destroyed) swiper.slideTo(currentIndex);
-  }, [currentIndex, swiper]);
+    if (!swiper.destroyed && open === true) swiper.slideTo(activeIndex);
+  }, [open, swiper.destroyed]);
 
   return null;
 }

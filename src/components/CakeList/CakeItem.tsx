@@ -29,9 +29,8 @@ export default function CakeItem({ images, cardIndex }: Props) {
           alt='cake image'
           src={images[0]}
           fill
-          sizes='(max-width: 600px) 30vw, (max-width: 900px) 20vw, (max-width: 1200px) 15vw, 260px'
+          sizes='(max-width: 600px) 23vw, (max-width: 900px) 16vw, (max-width: 1200px) 11vw, 260px'
           style={{ objectFit: 'cover' }}
-          loading='lazy'
         />
       </Box>
     </Box>

@@ -1,41 +1,39 @@
 'use client';
 
-import {
-  Age,
-  AgeStr,
-  Gender,
-  GenderStr,
-  ageKeys,
-  genderKeys,
-} from '@/constants';
-import { Chip } from '@mui/joy';
-import Box from '@mui/joy/Box';
+import { Age, Gender } from '@/constants';
+import { FilterAlt } from '@mui/icons-material';
+import { IconButton } from '@mui/joy';
 import { useState } from 'react';
 
 export default function FilterBox() {
   const [selectedGender, setSelectedGender] = useState<Gender | null>(null);
   const [selectedAge, setSelectedAge] = useState<Age | null>(null);
-
+  // eslint-disable-next-line
   const onClickGender = (gender: Gender) => {
     setSelectedGender(selectedGender === gender ? null : gender);
   };
-
+  // eslint-disable-next-line
   const onClickAge = (age: Age) => {
     setSelectedAge(selectedAge === age ? null : age);
   };
 
   return (
-    <Box
-      p={1}
-      position='sticky'
-      top={0}
-      zIndex={1100}
-      sx={{
-        backdropFilter: 'saturate(180%) blur(5px)',
-      }}
-      bgcolor='hsla(0,0%,100%,.8)'
-    >
-      <Box display='flex' gap={0.5} flexWrap='wrap'>
+    <>
+      <IconButton
+        color='success'
+        variant='solid'
+        sx={{
+          position: 'fixed',
+          bottom: 16,
+          right: 16,
+          borderRadius: '50%',
+          border: '2px solid white',
+          background: 'linear-gradient(315deg,#07a3b2,#d9ecc7)',
+        }}
+      >
+        <FilterAlt />
+      </IconButton>
+      {/* <Box display='flex' gap={0.5} flexWrap='wrap'>
         {genderKeys.map((gender) => {
           const checked = selectedGender === gender;
           return (
@@ -64,7 +62,7 @@ export default function FilterBox() {
             </Chip>
           );
         })}
-      </Box>
-    </Box>
+      </Box> */}
+    </>
   );
 }
