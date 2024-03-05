@@ -31,6 +31,7 @@ export default function CakeItem({ images, cardIndex }: Props) {
           fill
           sizes='(max-width: 600px) 23vw, (max-width: 900px) 16vw, (max-width: 1200px) 11vw, 260px'
           style={{ objectFit: 'cover' }}
+          quality={100}
         />
       </Box>
     </Box>
