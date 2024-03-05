@@ -1,66 +1,50 @@
 import { Age, COLLECTION, Gender } from '@/constants';
-import {
-  addDocument,
-  deleteDocument,
-  getDocuments,
-  updateDocument,
-} from '@/firebase/crud';
+import { getDocuments } from '@/firebase/crud';
+import { getBlurImage } from '@/utils/image-utils';
 
-export interface CakePriceWithoutId {
+export interface CakePrice {
+  id: string;
   size: string;
   price: number | null;
   oldPrice: number | null;
 }
-export interface CakePrice extends CakePriceWithoutId {
-  id: string;
-}
 
-export interface CakeWithoutId {
+export interface CakeFromApi {
   name: string;
   desc: string;
   prices: CakePrice[];
   images: string[];
   age: Age | null;
   gender: Gender | null;
+  categoryIds: string[];
 }
 
-export interface CakeForm extends Omit<CakeWithoutId, 'categories'> {}
-
-export interface Cake extends CakeWithoutId {
+export interface Cake extends CakeFromApi {
   id: string;
+  blurImages: string[];
 }
 
 export const getCakes = async () => {
   const doc = await getDocuments(COLLECTION.Cakes);
   const arr = doc.docs;
-  return arr.map((v) => {
-    const cakeWithoutId = v.data() as CakeWithoutId;
-    const cake: Cake = {
-      ...cakeWithoutId,
-      id: v.id,
-    };
-    return cake;
-  });
-};
+  const result = await Promise.all(
+    arr.map(async (v) => {
+      const cakeWithoutId = v.data() as CakeFromApi;
 
-export const deleteCake = (id: string) => {
-  return deleteDocument(COLLECTION.Cakes, id);
-};
+      const blurImages = (
+        await Promise.all(
+          cakeWithoutId.images.map((image) => getBlurImage(image)),
+        )
+      ).map((image) => image.base64);
 
-export const addCake = async (newCake: CakeForm) => {
-  return addDocument(COLLECTION.Cakes, newCake);
-};
+      const cake: Cake = {
+        id: v.id,
+        ...cakeWithoutId,
+        blurImages,
+      };
 
-export const updateCake = async (
-  id: string,
-  updatedData: Partial<CakeForm>,
-) => {
-  return updateDocument(COLLECTION.Cakes, id, updatedData);
-};
-
-export default {
-  getCakes,
-  deleteCake,
-  addCake,
-  updateCake,
+      return cake;
+    }),
+  );
+  return result;
 };

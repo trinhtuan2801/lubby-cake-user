@@ -11,6 +11,7 @@ export default async function Home() {
     <>
       <Box p={0.5}>
         <CakeList cakes={cakes} />
+        <Box height='500px' />
       </Box>
       <FilterBox />
 

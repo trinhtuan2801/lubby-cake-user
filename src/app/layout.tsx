@@ -1,10 +1,16 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Playpen_Sans } from 'next/font/google';
 import './globals.css';
 import Box from '@mui/joy/Box';
 import Background from '@/components/Background/Background';
+import ThemeRegistry from '@/theme/ThemeRegistry';
+import Header from '@/components/Header/Header';
 
 const inter = Inter({ subsets: ['vietnamese'] });
+const playpen = Playpen_Sans({
+  subsets: ['vietnamese'],
+  variable: '--font-playpen-sans',
+});
 
 export const metadata: Metadata = {
   title: 'Lubby Cake',
@@ -18,13 +24,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
-        <Background />
-        <Box display='flex' justifyContent='center'>
-          <Box flexGrow={1} maxWidth='1200px'>
-            {children}
+      <body className={`${inter.className} ${playpen.className}`}>
+        <ThemeRegistry options={{ key: 'joy' }}>
+          <Background />
+          <Header />
+          <Box display='flex' justifyContent='center'>
+            <Box flexGrow={1} maxWidth='1200px'>
+              {children}
+            </Box>
           </Box>
-        </Box>
+        </ThemeRegistry>
       </body>
     </html>
   );

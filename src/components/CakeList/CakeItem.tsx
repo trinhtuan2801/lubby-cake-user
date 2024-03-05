@@ -9,7 +9,7 @@ interface Props extends Cake {
   cardIndex: number;
 }
 
-export default function CakeItem({ images, cardIndex }: Props) {
+export default function CakeItem({ images, cardIndex, blurImages }: Props) {
   const { setActiveIndex, setOpen } = useCardIndex();
 
   return (
@@ -32,6 +32,8 @@ export default function CakeItem({ images, cardIndex }: Props) {
           sizes='(max-width: 600px) 23vw, (max-width: 900px) 16vw, (max-width: 1200px) 11vw, 260px'
           style={{ objectFit: 'cover' }}
           quality={100}
+          placeholder='blur'
+          blurDataURL={blurImages[0]}
         />
       </Box>
     </Box>

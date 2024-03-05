@@ -1,13 +1,15 @@
 /** @type {import('next').NextConfig} */
+import withPlaiceholder from '@plaiceholder/next';
+
 const nextConfig = {
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'firebasestorage.googleapis.com'
-      }
-    ]
-  }
+        hostname: 'firebasestorage.googleapis.com',
+      },
+    ],
+  },
 };
 
-export default nextConfig;
+export default withPlaiceholder(nextConfig);
