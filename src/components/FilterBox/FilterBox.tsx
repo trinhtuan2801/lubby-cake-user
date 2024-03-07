@@ -47,24 +47,36 @@ export default function FilterBox() {
   }, [open]);
 
   return (
-    <>
-      <IconButton
-        color='primary'
-        variant='solid'
-        size='lg'
-        sx={{
-          position: 'fixed',
-          bottom: 16,
-          right: 16,
-          borderRadius: '50%',
-          border: '2px solid white',
-          background: 'linear-gradient(315deg,#07a3b2,#d9ecc7)',
-          boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
-        }}
-        onClick={() => setOpen(true)}
+    <Box
+      position='fixed'
+      width='100%'
+      bottom={0}
+      left={0}
+      display='flex'
+      justifyContent='center'
+      p={2}
+    >
+      <Box
+        flexGrow={1}
+        maxWidth='1200px'
+        display='flex'
+        justifyContent='flex-end'
       >
-        <FilterAlt />
-      </IconButton>
+        <IconButton
+          color='primary'
+          variant='solid'
+          size='lg'
+          sx={{
+            borderRadius: '50%',
+            border: '2px solid white',
+            background: 'linear-gradient(315deg,#07a3b2,#d9ecc7)',
+            boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+          }}
+          onClick={() => setOpen(true)}
+        >
+          <FilterAlt />
+        </IconButton>
+      </Box>
 
       <Modal open={open} onClose={onClose}>
         <ModalDialog
@@ -143,6 +155,6 @@ export default function FilterBox() {
           </DialogContent>
         </ModalDialog>
       </Modal>
-    </>
+    </Box>
   );
 }
