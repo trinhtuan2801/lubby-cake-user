@@ -105,7 +105,7 @@ export default function CardSwiper({ cakes }: Props) {
                                 alt='cake image'
                                 src={images[0]}
                                 fill
-                                sizes='(max-width: 600px) 40vw, (max-width: 900px) 26vw, (max-width: 1200px) 20vw, 280px'
+                                sizes='(max-width: 1200px) 12vw, 130px'
                                 style={{ objectFit: 'cover' }}
                                 placeholder='blur'
                                 blurDataURL={blurImages[0]}

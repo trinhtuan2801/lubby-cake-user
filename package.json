@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next dev",
+    "start": "next start",
     "lint": "eslint --ignore-path .gitignore --max-warnings 0 \"./src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --ignore-path .gitignore --fix \"./src/**/*.{js,jsx,ts,tsx}\"",
     "format": "prettier --ignore-path .gitignore --write \"./src/**/*.{js,jsx,ts,tsx,json,css,md}\"",

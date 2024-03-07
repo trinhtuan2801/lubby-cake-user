@@ -29,7 +29,7 @@ export default function CakeItem({ images, cardIndex, blurImages }: Props) {
           alt='cake image'
           src={images[0]}
           fill
-          sizes='(max-width: 600px) 23vw, (max-width: 900px) 16vw, (max-width: 1200px) 11vw, 260px'
+          sizes='(max-width: 1200px) 12vw, 130px'
           style={{ objectFit: 'cover' }}
           quality={100}
           placeholder='blur'

@@ -87,7 +87,7 @@ export default function FilterBox() {
             maxWidth: '400px',
           }}
         >
-          <ModalClose />
+          <ModalClose aria-label='Close button' />
           <DialogTitle>
             <Typography level='title-lg' color='primary'>
               Chọn lọc
@@ -145,10 +145,20 @@ export default function FilterBox() {
               </Box>
             </Box>
             <Box mt={2} display='flex' justifyContent='flex-end' gap={1}>
-              <IconButton variant='solid' color='primary' onClick={onOk}>
+              <IconButton
+                variant='solid'
+                color='primary'
+                onClick={onOk}
+                aria-label='Ok button'
+              >
                 <Check />
               </IconButton>
-              <IconButton variant='outlined' color='neutral' onClick={onClose}>
+              <IconButton
+                variant='outlined'
+                color='neutral'
+                onClick={onClose}
+                aria-label='Cancel button'
+              >
                 <Clear />
               </IconButton>
             </Box>
