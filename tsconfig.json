@@ -29,7 +29,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "custom-env.d.ts"
+    "custom-env.d.ts",
+    "src/components/FilterContainer"
   ],
   "exclude": ["node_modules"]
 }
