@@ -1,50 +1,18 @@
 'use client';
 
-import {
-  Age,
-  AgeStr,
-  Gender,
-  GenderStr,
-  ageKeys,
-  genderKeys,
-} from '@/constants';
 import useFilter from '@/zustand/useFilter';
-import { Check, Clear, FilterAlt } from '@mui/icons-material';
-import {
-  Box,
-  Chip,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  Modal,
-  ModalClose,
-  ModalDialog,
-  Typography,
-} from '@mui/joy';
-import { useEffect, useState } from 'react';
+import { FilterAlt } from '@mui/icons-material';
+import { Badge, Box, IconButton } from '@mui/joy';
+import { useMemo } from 'react';
 
 export default function FilterBox() {
-  const { age, gender, setAge, setGender } = useFilter();
-  const [selectedGender, setSelectedGender] = useState<Gender | null>(null);
-  const [selectedAge, setSelectedAge] = useState<Age | null>(null);
-  const [open, setOpen] = useState(true);
+  const { age, gender, setIsOpenFilter } = useFilter();
 
-  const onClose = () => {
-    setOpen(false);
-  };
-
-  const onOk = () => {
-    setAge(selectedAge);
-    setGender(selectedGender);
-    onClose();
-  };
-
-  useEffect(() => {
-    if (open) {
-      setSelectedAge(age);
-      setSelectedGender(gender);
-    }
-  }, [open]);
+  const badgeContent = useMemo(() => {
+    if (gender !== null && age !== null) return 2;
+    if (gender === null && age === null) return 0;
+    return 1;
+  }, [gender, age]);
 
   return (
     <Box
@@ -62,109 +30,34 @@ export default function FilterBox() {
         display='flex'
         justifyContent='flex-end'
       >
-        <IconButton
+        <Badge
+          badgeContent={badgeContent}
           color='primary'
-          variant='solid'
-          size='lg'
+          size='sm'
           sx={{
-            borderRadius: '50%',
-            border: '2px solid white',
-            background: 'linear-gradient(315deg,#07a3b2,#d9ecc7)',
-            boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+            '& .MuiBadge-badge': {
+              top: 5,
+              right: 5,
+              bgcolor: 'purple',
+            },
           }}
-          onClick={() => setOpen(true)}
         >
-          <FilterAlt />
-        </IconButton>
+          <IconButton
+            color='primary'
+            variant='solid'
+            size='lg'
+            sx={{
+              borderRadius: '50%',
+              border: '2px solid white',
+              background: 'linear-gradient(315deg,#07a3b2,#d9ecc7)',
+              boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+            }}
+            onClick={() => setIsOpenFilter(true)}
+          >
+            <FilterAlt />
+          </IconButton>
+        </Badge>
       </Box>
-
-      <Modal open={open} onClose={onClose}>
-        <ModalDialog
-          size='md'
-          sx={{
-            borderRadius: '16px',
-            width: 'calc(100vw - 2rem)',
-            maxWidth: '400px',
-          }}
-        >
-          <ModalClose aria-label='Close button' />
-          <DialogTitle>
-            <Typography level='title-lg' color='primary'>
-              Chọn lọc
-            </Typography>
-          </DialogTitle>
-          <DialogContent>
-            <Box mt={1}>
-              <Typography level='title-sm'>Giới tính</Typography>
-              <Box display='flex' gap={0.5} flexWrap='wrap' mt={0.5}>
-                <Chip
-                  variant={selectedGender === null ? 'solid' : 'outlined'}
-                  color={selectedGender === null ? 'primary' : 'neutral'}
-                  onClick={() => setSelectedGender(null)}
-                >
-                  Tất cả
-                </Chip>
-                {genderKeys.map((gender) => {
-                  const checked = selectedGender === gender;
-                  return (
-                    <Chip
-                      key={gender}
-                      variant={checked ? 'solid' : 'outlined'}
-                      color={checked ? 'primary' : 'neutral'}
-                      onClick={() => setSelectedGender(gender)}
-                    >
-                      {GenderStr[gender]}
-                    </Chip>
-                  );
-                })}
-              </Box>
-            </Box>
-            <Box mt={1}>
-              <Typography level='title-sm'>Độ tuổi</Typography>
-              <Box display='flex' gap={0.5} flexWrap='wrap' mt={0.5}>
-                <Chip
-                  variant={selectedAge === null ? 'solid' : 'outlined'}
-                  color={selectedAge === null ? 'primary' : 'neutral'}
-                  onClick={() => setSelectedAge(null)}
-                >
-                  Tất cả
-                </Chip>
-                {ageKeys.map((age) => {
-                  const checked = selectedAge === age;
-                  return (
-                    <Chip
-                      key={age}
-                      variant={checked ? 'solid' : 'outlined'}
-                      color={checked ? 'primary' : 'neutral'}
-                      onClick={() => setSelectedAge(age)}
-                    >
-                      {AgeStr[age]}
-                    </Chip>
-                  );
-                })}
-              </Box>
-            </Box>
-            <Box mt={2} display='flex' justifyContent='flex-end' gap={1}>
-              <IconButton
-                variant='solid'
-                color='primary'
-                onClick={onOk}
-                aria-label='Ok button'
-              >
-                <Check />
-              </IconButton>
-              <IconButton
-                variant='outlined'
-                color='neutral'
-                onClick={onClose}
-                aria-label='Cancel button'
-              >
-                <Clear />
-              </IconButton>
-            </Box>
-          </DialogContent>
-        </ModalDialog>
-      </Modal>
     </Box>
   );
 }

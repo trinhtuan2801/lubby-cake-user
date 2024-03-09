@@ -137,6 +137,9 @@ export default function CardSwiper({ cakes }: Props) {
                               level='body-sm'
                               color='primary'
                               fontWeight='bold'
+                              sx={{
+                                cursor: 'pointer',
+                              }}
                             >
                               Mô tả
                             </Typography>

@@ -6,6 +6,8 @@ interface UseFilter {
   age: Age | null;
   setGender: (gender: Gender | null) => void;
   setAge: (age: Age | null) => void;
+  isOpenFilter: boolean;
+  setIsOpenFilter: (isOpenFilter: boolean) => void;
 }
 
 const useFilter = create<UseFilter>((set) => ({
@@ -16,6 +18,10 @@ const useFilter = create<UseFilter>((set) => ({
   },
   setAge: (age) => {
     set({ age });
+  },
+  isOpenFilter: true,
+  setIsOpenFilter: (isOpenFilter) => {
+    set({ isOpenFilter });
   },
 }));
 
