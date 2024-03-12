@@ -24,16 +24,17 @@ export default function PriceSelect({
         <Typography
           color='primary'
           fontWeight='bold'
-          level='body-md'
+          level='body-lg'
           {...ActivePriceProps}
         >
           {numberWithCommas(activePrice.price)}đ
         </Typography>
         {!!activePrice.oldPrice && (
           <Typography
-            level='body-xs'
+            level='body-sm'
             component='span'
             sx={{ textDecoration: 'line-through' }}
+            textColor='common.white'
           >
             {numberWithCommas(activePrice.oldPrice)}đ
           </Typography>
@@ -46,9 +47,10 @@ export default function PriceSelect({
             <Chip
               key={price.id}
               color={isActive ? 'primary' : 'neutral'}
-              variant={isActive ? 'solid' : 'outlined'}
+              variant={'solid'}
               onClick={() => setActiveIndex(index)}
               sx={{ justifyContent: 'flex-start' }}
+              size='lg'
             >
               {price.size}
             </Chip>

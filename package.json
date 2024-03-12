@@ -33,9 +33,9 @@
     "plaiceholder": "^3.0.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-photo-view": "^1.2.4",
     "sass": "^1.71.1",
     "sharp": "^0.33.2",
-    "swiper": "^11.0.7",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
