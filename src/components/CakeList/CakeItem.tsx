@@ -2,43 +2,24 @@
 
 import { Cake } from '@/api/cake';
 import Image from 'next/image';
-import { Box, Typography } from '@mui/joy';
-import useCardIndex from '@/zustand/useCardIndex';
-import { PhotoView } from 'react-photo-view';
-import 'react-photo-view/dist/react-photo-view.css';
-import PriceSelect from './PriceSelect';
-interface Props extends Cake {
-  cardIndex: number;
-}
+import { Box } from '@mui/joy';
+import { useRef } from 'react';
+import ViewMode from './ViewMode';
 
-export default function CakeItem({
-  images,
-  cardIndex,
-  blurImages,
-  name,
-  prices,
-}: Props) {
-  const { setActiveIndex, setOpen } = useCardIndex();
+interface Props extends Cake {}
+
+export default function CakeItem(props: Props) {
+  const { images, blurImages } = props;
+  const viewModeRef = useRef<HTMLDivElement>(null);
 
   return (
-    <PhotoView
-      src={images[0]}
-      overlay={
-        <Box p={2} pb={3}>
-          <Typography textColor='common.white' fontWeight='bold'>
-            {name}
-          </Typography>
-          <PriceSelect prices={prices} mt={0.5} />
-        </Box>
-      }
-    >
+    <>
       <Box
         overflow='hidden'
         height='100%'
         borderRadius={6}
         onClick={() => {
-          setOpen(true);
-          setActiveIndex(cardIndex);
+          viewModeRef.current?.click?.();
         }}
         sx={{ cursor: 'pointer' }}
       >
@@ -55,6 +36,7 @@ export default function CakeItem({
           />
         </Box>
       </Box>
-    </PhotoView>
+      <ViewMode ref={viewModeRef} {...props} />
+    </>
   );
 }

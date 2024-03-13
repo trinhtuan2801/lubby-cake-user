@@ -22,6 +22,7 @@ export interface CakeFromApi {
 export interface Cake extends CakeFromApi {
   id: string;
   blurImages: string[];
+  imageDims: { width: number; height: number }[];
 }
 
 export const getCakes = async () => {
@@ -31,16 +32,18 @@ export const getCakes = async () => {
     arr.map(async (v) => {
       const cakeWithoutId = v.data() as CakeFromApi;
 
-      const blurImages = (
-        await Promise.all(
-          cakeWithoutId.images.map((image) => getBlurImage(image)),
-        )
-      ).map((image) => image.base64);
+      const blurImages = await Promise.all(
+        cakeWithoutId.images.map((image) => getBlurImage(image)),
+      );
 
       const cake: Cake = {
         id: v.id,
         ...cakeWithoutId,
-        blurImages,
+        blurImages: blurImages.map((image) => image.base64),
+        imageDims: blurImages.map(({ metadata: { width, height } }) => ({
+          width,
+          height,
+        })),
       };
 
       return cake;

@@ -49,7 +49,6 @@ export default function FilterModal() {
   return (
     <Modal open={isOpenFilter} onClose={onClose}>
       <ModalDialog
-        size='md'
         sx={{
           borderRadius: '16px',
           width: 'calc(100vw - 2rem)',
@@ -58,22 +57,14 @@ export default function FilterModal() {
       >
         <ModalClose aria-label='Close button' />
         <DialogTitle>
-          <Typography level='title-lg' color='primary'>
+          <Typography level='title-lg' color='primary' fontWeight='bold'>
             Chọn lọc
           </Typography>
         </DialogTitle>
         <DialogContent>
           <Box mt={1}>
-            <Typography level='title-sm'>Giới tính</Typography>
+            <Typography level='title-md'>Giới tính</Typography>
             <Box display='flex' gap={0.5} flexWrap='wrap' mt={0.5}>
-              <Chip
-                variant={selectedGender === null ? 'solid' : 'outlined'}
-                color={selectedGender === null ? 'primary' : 'neutral'}
-                onClick={() => setSelectedGender(null)}
-                size='lg'
-              >
-                Tất cả
-              </Chip>
               {genderKeys.map((gender) => {
                 const checked = selectedGender === gender;
                 return (
@@ -88,19 +79,19 @@ export default function FilterModal() {
                   </Chip>
                 );
               })}
-            </Box>
-          </Box>
-          <Box mt={1}>
-            <Typography level='title-sm'>Độ tuổi</Typography>
-            <Box display='flex' gap={0.5} flexWrap='wrap' mt={0.5}>
               <Chip
-                variant={selectedAge === null ? 'solid' : 'outlined'}
-                color={selectedAge === null ? 'primary' : 'neutral'}
-                onClick={() => setSelectedAge(null)}
+                variant={selectedGender === null ? 'solid' : 'outlined'}
+                color={selectedGender === null ? 'primary' : 'neutral'}
+                onClick={() => setSelectedGender(null)}
                 size='lg'
               >
                 Tất cả
               </Chip>
+            </Box>
+          </Box>
+          <Box mt={1}>
+            <Typography level='title-md'>Độ tuổi</Typography>
+            <Box display='flex' gap={0.5} flexWrap='wrap' mt={0.5}>
               {ageKeys.map((age) => {
                 const checked = selectedAge === age;
                 return (
@@ -115,9 +106,17 @@ export default function FilterModal() {
                   </Chip>
                 );
               })}
+              <Chip
+                variant={selectedAge === null ? 'solid' : 'outlined'}
+                color={selectedAge === null ? 'primary' : 'neutral'}
+                onClick={() => setSelectedAge(null)}
+                size='lg'
+              >
+                Tất cả
+              </Chip>
             </Box>
           </Box>
-          <Box mt={2} display='flex' justifyContent='flex-end' gap={1}>
+          <Box mt={3} display='flex' justifyContent='flex-end' gap={1}>
             <IconButton
               variant='solid'
               color='primary'
