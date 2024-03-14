@@ -59,7 +59,7 @@ export default forwardRef<HTMLDivElement, Props>(function ViewMode(
                 alt='cake image'
                 src={images[0]}
                 fill
-                sizes='(max-width: 600px) 100vw'
+                sizes='(max-width: 600px) 100vw, 600px'
                 quality={100}
                 placeholder='blur'
                 blurDataURL={blurImages[0]}
