@@ -11,7 +11,8 @@ export function middleware(request: NextRequest) {
   // Check the origin from the request
   const origin = request.headers.get('origin') ?? '';
   const isAllowedOrigin = allowedOrigins.includes(origin);
-
+  // eslint-disable-next-line
+  console.log('origin', origin);
   // Handle preflighted requests
   const isPreflight = request.method === 'OPTIONS';
 
