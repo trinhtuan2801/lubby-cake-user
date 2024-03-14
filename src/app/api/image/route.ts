@@ -20,7 +20,11 @@ export const POST = async (req: NextRequest) => {
       path.join(process.cwd(), 'public/uploads/' + filename),
       buffer,
     );
-    return NextResponse.json({ Message: 'Success', status: 201 });
+    return NextResponse.json({
+      Message: 'Success',
+      status: 201,
+      data: { url: `/uploads/${filename}` },
+    });
   } catch (error) {
     // eslint-disable-next-line
     console.log('Error occured ', error);
