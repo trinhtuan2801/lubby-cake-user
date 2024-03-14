@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const allowedOrigins = ['https://google.com'];
+const allowedOrigins = ['https://lubby-cake-admin.vercel.app/'];
 
 const corsOptions = {
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
