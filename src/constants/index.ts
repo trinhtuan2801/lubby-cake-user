@@ -1,12 +1,5 @@
 export enum COLLECTION {
-  Users = 'users',
   Cakes = 'cakes',
-  Categories = 'categories',
-}
-
-export enum CssVar {
-  HEADER_HEIGHT = '--Header-height',
-  PAGE_WIDTH = '--Page-width',
 }
 
 export enum Gender {

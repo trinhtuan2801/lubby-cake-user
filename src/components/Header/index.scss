@@ -14,10 +14,6 @@
 
 $text-color: #fff;
 
-.playful {
-  color: $text-color;
-}
-
 .playful span {
   position: relative;
   color: $text-color;
@@ -26,42 +22,34 @@ $text-color: #fff;
 }
 
 .playful span:nth-child(2n) {
-  color: $text-color;
   animation-delay: 0.2s;
 }
 
 .playful span:nth-child(3n) {
-  color: $text-color;
   animation-delay: 0.25s;
 }
 
 .playful span:nth-child(4n) {
-  color: $text-color;
   animation-delay: 0.3s;
 }
 
 .playful span:nth-child(5n) {
-  color: $text-color;
   animation-delay: 0.35s;
 }
 
 .playful span:nth-child(7n) {
-  color: $text-color;
   animation-delay: 0.4s;
 }
 
 .playful span:nth-child(8n) {
-  color: $text-color;
   animation-delay: 0.45s;
 }
 
 .playful span:nth-child(9n) {
-  color: $text-color;
   animation-delay: 0.5s;
 }
 
 .playful span:nth-child(10n) {
-  color: $text-color;
   animation-delay: 0.55s;
 }
 
@@ -76,13 +64,3 @@ $text-color: #fff;
     top: 0;
   }
 }
-
-// .header-text {
-//   font-size: 65px;
-//   text-transform: uppercase;
-//   font-weight: normal;
-//   display: block;
-//   text-align: center;
-//   margin: 10rem auto;
-//   margin: calc(50vh - 5rem) auto;
-// }

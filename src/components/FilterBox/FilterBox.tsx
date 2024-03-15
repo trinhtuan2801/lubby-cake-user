@@ -53,6 +53,7 @@ export default function FilterBox() {
               boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
             }}
             onClick={() => setIsOpenFilter(true)}
+            aria-label='filter button'
           >
             <FilterAlt />
           </IconButton>
