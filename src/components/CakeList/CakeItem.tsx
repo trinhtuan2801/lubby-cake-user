@@ -13,30 +13,28 @@ export default function CakeItem(props: Props) {
   const viewModeRef = useRef<HTMLDivElement>(null);
 
   return (
-    <>
-      <Box
-        overflow='hidden'
-        height='100%'
-        borderRadius={6}
-        onClick={() => {
-          viewModeRef.current?.click?.();
-        }}
-        sx={{ cursor: 'pointer' }}
-      >
-        <Box position='relative' sx={{ aspectRatio: '1 / 1' }}>
-          <Image
-            alt='cake image'
-            src={images[0]}
-            fill
-            sizes='(max-width: 1200px) 12vw, 260px'
-            style={{ objectFit: 'cover' }}
-            quality={100}
-            placeholder='blur'
-            blurDataURL={blurImages[0]}
-          />
-        </Box>
-      </Box>
+    <Box
+      overflow='hidden'
+      height='100%'
+      borderRadius={6}
+      onClick={() => {
+        viewModeRef.current?.click?.();
+      }}
+      sx={{ cursor: 'pointer' }}
+    >
       <ViewMode ref={viewModeRef} {...props} />
-    </>
+      <Box position='relative' sx={{ aspectRatio: '1 / 1' }}>
+        <Image
+          alt='cake image'
+          src={images[0]}
+          fill
+          sizes='(max-width: 1200px) 12vw, 260px'
+          style={{ objectFit: 'cover' }}
+          quality={100}
+          placeholder='blur'
+          blurDataURL={blurImages[0]}
+        />
+      </Box>
+    </Box>
   );
 }
