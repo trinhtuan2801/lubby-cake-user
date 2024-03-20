@@ -19,6 +19,7 @@ export default function CakeList({ cakes }: Props) {
       key={screenWidth}
       speed={() => 200}
       maskClosable={false}
+      loop
       overlayRender={({ overlay, index }) => {
         return (
           <Box
