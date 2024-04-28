@@ -15,6 +15,10 @@ const playpen = Playpen_Sans({
 export const metadata: Metadata = {
   title: 'Lubby Cake',
   description: 'Lubby Cake - Bánh ngon mỗi ngày',
+  openGraph: {
+    url: 'https://lubbycake.vercel.app/',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
