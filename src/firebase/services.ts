@@ -1,9 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import APP_ENV from '@/app-env';
+import APP_ENV from '@/env';
 
-const firebaseConfig = APP_ENV.firebase;
+const firebaseConfig = APP_ENV.FIREBASE;
 
 export const app = initializeApp(firebaseConfig);
 

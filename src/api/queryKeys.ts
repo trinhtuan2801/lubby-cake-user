@@ -1,3 +1,7 @@
 export enum QUERY_KEY {
-  Cakes = 'cakes',
+  CAKES = 'CAKES',
+}
+
+export enum CACHE_KEY {
+  CAKES = 'CAKES',
 }

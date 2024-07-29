@@ -5,14 +5,22 @@ import Box from '@mui/joy/Box';
 import Background from '@/components/Background/Background';
 import ThemeRegistry from '@/theme/ThemeRegistry';
 import Header from '@/components/Header/Header';
+import APP_ENV from '@/env';
 
-const inter = Inter({ subsets: ['vietnamese'] });
-const playpen = Playpen_Sans({
+const inter = Inter({
   subsets: ['vietnamese'],
+  display: 'swap',
+  adjustFontFallback: false,
+});
+const playpen = Playpen_Sans({
   variable: '--font-playpen-sans',
+  subsets: ['vietnamese'],
+  display: 'swap',
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(APP_ENV.WEB_BASE_URL!),
   title: 'Lubby Cake',
   description: 'Lubby Cake - Bánh ngon mỗi ngày',
   openGraph: {

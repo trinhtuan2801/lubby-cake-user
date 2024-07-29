@@ -1,6 +1,8 @@
 import { Age, COLLECTION, Gender } from '@/constants';
 import { getDocuments } from '@/firebase/crud';
 import { getBlurImage } from '@/utils/image-utils';
+import { unstable_cache } from 'next/cache';
+import { CACHE_KEY } from './queryKeys';
 
 export interface CakePrice {
   id: string;
@@ -51,3 +53,7 @@ export const getCakes = async () => {
   );
   return result;
 };
+
+export const nextGetCakes = unstable_cache(getCakes, [CACHE_KEY.CAKES], {
+  tags: [CACHE_KEY.CAKES],
+});
