@@ -6,6 +6,7 @@ import Background from '@/components/Background/Background';
 import ThemeRegistry from '@/theme/ThemeRegistry';
 import Header from '@/components/Header/Header';
 import APP_ENV from '@/env';
+import Script from 'next/script';
 
 const inter = Inter({
   subsets: ['vietnamese'],
@@ -36,6 +37,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
+      <Script
+        async
+        src='https://www.googletagmanager.com/gtag/js?id=G-E9WG7176DW'
+      ></Script>
+      <Script src='/scripts/ga.js'></Script>
+
       <body className={`${inter.className} ${playpen.className}`}>
         <ThemeRegistry options={{ key: 'joy' }}>
           <Background />

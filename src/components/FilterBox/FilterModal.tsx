@@ -65,6 +65,14 @@ export default function FilterModal() {
           <Box mt={1}>
             <Typography level='title-md'>Giới tính</Typography>
             <Box display='flex' gap={0.5} flexWrap='wrap' mt={0.5}>
+              <Chip
+                variant={selectedGender === null ? 'solid' : 'outlined'}
+                color={selectedGender === null ? 'primary' : 'neutral'}
+                onClick={() => setSelectedGender(null)}
+                size='lg'
+              >
+                Tất cả
+              </Chip>
               {genderKeys.map((gender) => {
                 const checked = selectedGender === gender;
                 return (
@@ -79,19 +87,19 @@ export default function FilterModal() {
                   </Chip>
                 );
               })}
-              <Chip
-                variant={selectedGender === null ? 'solid' : 'outlined'}
-                color={selectedGender === null ? 'primary' : 'neutral'}
-                onClick={() => setSelectedGender(null)}
-                size='lg'
-              >
-                Tất cả
-              </Chip>
             </Box>
           </Box>
           <Box mt={1}>
             <Typography level='title-md'>Độ tuổi</Typography>
             <Box display='flex' gap={0.5} flexWrap='wrap' mt={0.5}>
+              <Chip
+                variant={selectedAge === null ? 'solid' : 'outlined'}
+                color={selectedAge === null ? 'primary' : 'neutral'}
+                onClick={() => setSelectedAge(null)}
+                size='lg'
+              >
+                Tất cả
+              </Chip>
               {ageKeys.map((age) => {
                 const checked = selectedAge === age;
                 return (
@@ -106,14 +114,6 @@ export default function FilterModal() {
                   </Chip>
                 );
               })}
-              <Chip
-                variant={selectedAge === null ? 'solid' : 'outlined'}
-                color={selectedAge === null ? 'primary' : 'neutral'}
-                onClick={() => setSelectedAge(null)}
-                size='lg'
-              >
-                Tất cả
-              </Chip>
             </Box>
           </Box>
           <Box mt={3} display='flex' justifyContent='flex-end' gap={1}>
