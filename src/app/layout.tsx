@@ -37,6 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
+      <Script src='/scripts/ga-tag.js'></Script>
       <Script
         async
         src='https://www.googletagmanager.com/gtag/js?id=G-E9WG7176DW'
@@ -44,6 +45,14 @@ export default function RootLayout({
       <Script src='/scripts/ga.js'></Script>
 
       <body className={`${inter.className} ${playpen.className}`}>
+        <noscript>
+          <iframe
+            src='https://www.googletagmanager.com/ns.html?id=GTM-KLV4Z3BN'
+            height='0'
+            width='0'
+            style={{ display: 'none', visibility: 'hidden' }}
+          ></iframe>
+        </noscript>
         <ThemeRegistry options={{ key: 'joy' }}>
           <Background />
           <Header />
